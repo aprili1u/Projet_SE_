@@ -27,22 +27,21 @@ public class Reseau {
 	}
 	
 	private void addPaquet(Paquet paquet) {
-		// Mise à jour de paquets[]
 		this.paquets.append(paquet);
 	}
 	
 	private void addArc(Arc arc) {
-		// Mise à jour de arcs[]
+		// Mise a jour de arcs[]
 		this.arcs.append(arc);
 	}
 	
 	private void addNoeud(Noeud noeud) {
-		// Mise à jour de noeuds[]
+		// Mise a jour de noeuds[]
 		this.noeuds.append(noeud);
 	}
 	
 	private void removePaquet(Paquet paquet) {
-		// Mise à jour de paquets[]
+		// Mise a jour de paquets[]
 		for i, p in enumerate(paquets) {
 			if(p == paquet) {
 				this.paquets.pop(i);
@@ -53,7 +52,7 @@ public class Reseau {
 	}
 	
 	private void removeArc(Arc arc) {
-		// Mise à jour de arcs[]
+		// Mise a jour de arcs[]
 		for i, a in enumerate(arcs) {
 			if(a == arc) {
 				this.arcs.pop(i);
@@ -64,7 +63,7 @@ public class Reseau {
 	}
 	
 	private void removeNoeud(Noeud noeud) {
-		// Mise à jour de noeuds[]
+		// Mise a jour de noeuds[]
 		for i, n in enumerate(noeud) {
 			if(n == noeud) {
 				this.noeuds.pop(i);
@@ -75,12 +74,12 @@ public class Reseau {
 	}
 	
 	private void tic() {
-		// Écoulement du temps
+		// Ecoulement du temps
 		this.temps++;
 	}
 	
 	private void deplacerPaquet(Paquet paquet, int path[]) {
-		// Mise à jour arcs[], noeuds[] et paquets[]
+		// Mise a jour arcs[], noeuds[] et paquets[]
 		return;
 	}
 	
