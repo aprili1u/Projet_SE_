@@ -5,7 +5,7 @@ public class Noeud {
 
     public Noeud(Integer number){
         this.id = number;
-        this.Queue = new PriorityQ();
+        this.Queue = new PriorityQ(20);
     }
 
     public Integer getID(){
@@ -17,9 +17,10 @@ public class Noeud {
     }
 
     public void enterPaquet(Paquet P){
+        this.Queue.insertElement(P);
     }
 
     public Paquet exitPaquet(){
-        return new Paquet();
+        return this.Queue.popElement();
     }
 }
