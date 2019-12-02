@@ -27,6 +27,7 @@ public class Reseau {
 	}
 	
 	private void addPaquet(Paquet paquet) {
+		// Mise a jour de paquets[]
 		this.paquets.append(paquet);
 	}
 	
