@@ -43,8 +43,8 @@ public class Reseau {
 	
 	private void removePaquet(Paquet paquet) {
 		// Mise a jour de paquets[]
-		for(int i=0; i<this.paquets. enumerate(paquets) {
-			if(p == paquet) {
+		for(int i=0; i<paquets.length; i++) {
+			if(paquets[i] == paquet) {
 				this.paquets.pop(i);
 				return;
 			}
@@ -54,8 +54,8 @@ public class Reseau {
 	
 	private void removeArc(Arc arc) {
 		// Mise a jour de arcs[]
-		for i, a in enumerate(arcs) {
-			if(a == arc) {
+		for(int i=0; i<arcs.length; i++) {
+			if(arcs[i] == arc) {
 				this.arcs.pop(i);
 				return;
 			}
@@ -65,8 +65,8 @@ public class Reseau {
 	
 	private void removeNoeud(Noeud noeud) {
 		// Mise a jour de noeuds[]
-		for i, n in enumerate(noeud) {
-			if(n == noeud) {
+		for(int i=0; i<noeuds.length; i++) {
+			if(noeuds[i] == noeud) {
 				this.noeuds.pop(i);
 				return;
 			}
@@ -89,7 +89,7 @@ public class Reseau {
 		n = this.arcs.length;
 		dep = paquet.getNoeudDepart();
 		dest = paquet.getNoeudDestination();
-		int nullMatrix[n]
+		int nullMatrix[n][n] = new int[n][n];
 		while()
 		return path;
 	}
