@@ -16,10 +16,10 @@ public class Noeud {
         return this.Queue;
     }
 
-    public void enterPackage(Paquet P){
+    public void enterPaquet(Paquet P){
     }
 
-    public Paquet exitPackage(){
+    public Paquet exitPaquet(){
         return new Paquet();
     }
 }
