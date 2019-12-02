@@ -5,7 +5,7 @@ public class Noeud {
 
     public Noeud(Integer number){
         this.id = number;
-        this.Queue = new PriorityQ();
+        this.Queue = new PriorityQ(20);
     }
 
     public Integer getID(){
