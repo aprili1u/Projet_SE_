@@ -1,27 +1,32 @@
 public class Paquet {
-    private NoeudPosition;
-    private NoeudDestination;
-    private NoeudDepart;
-    private Priority;
-    private Trajet;
+    private Noeud NoeudPosition;
+    private Noeud NoeudDestination;
+    private Noeud NoeudDepart;
+    private int Priority;
+    private Noeud Trajet[];
 
-    public getNoeudPosition() {
+    public Paquet (Noeud NoeudDepart,Noeud NoeudDestination, int Priority, Noeud Trajet[])  {
+        this.NoeudPosition = NoeudDepart;
+    }
+
+
+    public Noeud getNoeudPosition() {
         return this.NoeudPosition;
     };
 
-    public getNoeudDestination() {
+    public Noeud getNoeudDestination() {
         return this.NoeudPosition;
     };
 
-    public getNoeudDepart () {
+    public Noeud getNoeudDepart () {
         return this.NoeudDepart;
     };
 
-    public getPriority () {
+    public int getPriority () {
         return this.Priority;
     };
 
-    public getTrajet () {
+    public Noeud[] getTrajet () {
         return this.Trajet;
     };
 
