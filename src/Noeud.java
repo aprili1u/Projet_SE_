@@ -17,9 +17,10 @@ public class Noeud {
     }
 
     public void enterPaquet(Paquet P){
+        this.Queue.insertElement(P);
     }
 
     public Paquet exitPaquet(){
-        return new Paquet();
+        return this.Queue.popElement();
     }
 }
