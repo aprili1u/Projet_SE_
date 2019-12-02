@@ -16,13 +16,15 @@ public class Reseau {
 		// Construction de la matrice d'adjacence
 		n = this.arcs.length;
 		int adjacentMatrix[n][n] = new int[n][n];
-		for i in range(n):
-			for j in range(n):
+		for(int i=0; i<n; i++) {
+			for(int j=0; j<n; j++) {
 				Arc arc = new Arc(i, j);
 				if(arc in this.arcs[]) {
 					adjacentMatrix[i][j] = 1;
 				}
 				adjacentMatrix[i][j] = 0;
+			}
+		}
 		return adjacentMatrix;
 	}
 	
