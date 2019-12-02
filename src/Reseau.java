@@ -43,7 +43,7 @@ public class Reseau {
 	
 	private void removePaquet(Paquet paquet) {
 		// Mise a jour de paquets[]
-		for i, p in enumerate(paquets) {
+		for(int i=0; i<this.paquets. enumerate(paquets) {
 			if(p == paquet) {
 				this.paquets.pop(i);
 				return;
@@ -86,6 +86,11 @@ public class Reseau {
 	
 	private int[] plusCourtChemin(Paquet paquet) {
 		// Calcul du plus court chemin
+		n = this.arcs.length;
+		dep = paquet.getNoeudDepart();
+		dest = paquet.getNoeudDestination();
+		int nullMatrix[n]
+		while()
 		return path;
 	}
 }
