@@ -1,4 +1,5 @@
 public class Noeud {
+<<<<<<< HEAD
 
     private Integer id;
     private PriorityQ Queue;
@@ -22,4 +23,7 @@ public class Noeud {
     public Paquet exitPackage(){
         return new Paquet();
     }
+=======
+	public
+>>>>>>> 5ccab0d487a51c90352f33680c5d3e7ca8d56c46
 }
