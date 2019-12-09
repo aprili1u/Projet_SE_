@@ -1,7 +1,10 @@
 import java.util.ArrayList;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ReseauTest {
-    public static void main (String args[]) {
+
+    @org.junit.jupiter.api.Test
+    void simpleTest() {
         System.out.println("Hello world");
         Reseau r = new Reseau();
         System.out.println("Arcs: " + r.getArcs());
@@ -33,7 +36,7 @@ public class ReseauTest {
         r.addArc(a2);
         r.addArc(a3);
         r.addArc(a4);
-        Paquet p = new Paquet(n0, n1, 1, new ArrayList<Noeud>());
+        Paquet p = new Paquet(n0, n1, 1, new Noeud[2]);
         r.addPaquet(p);
         //System.out.println("Arcs: " + r.getArcs());
         //System.out.println("Noeuds: " + r.getNoeuds());
