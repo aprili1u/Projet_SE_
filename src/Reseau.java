@@ -113,6 +113,10 @@ public class Reseau {
 	
 	public void deplacerPaquet(Paquet paquet, int path[]) {
 		// Mise a jour arcs[], noeuds[] et paquets[]
+		
+		// Probleme: comment metre a jour la position du paquet dans l'arc sans
+		// avoir acces a la taille de l'arc
+		
 		return;
 	}
 	
