@@ -13,10 +13,22 @@ public class Reseau {
 		this.arcs = new ArrayList<Arc>();
 		this.noeuds = new ArrayList<Noeud>();
 	}
-	
+
+	public ArrayList<Paquet> getPaquets() {
+		return this.paquets;
+	}
+
+	public ArrayList<Arc> getArcs() {
+		return this.arcs;
+	}
+
+	public ArrayList<Noeud> getNoeuds() {
+		return this.noeuds;
+	}
+
 	public int[][] arcToMatrix() {
 		// Construction de la matrice d'adjacence
-		int n = this.arcs.size();
+		int n = this.noeuds.size();
 		int adjacentMatrix[][] = new int[n][n];
 		for(int i=0; i<n; i++) {
 			for(int j=0; j<n; j++) {
@@ -30,6 +42,20 @@ public class Reseau {
 			}
 		}
 		return adjacentMatrix;
+	}
+
+	public void printMatrix(int[][] m) {
+		int n = m.length;
+		System.out.print("[ ");
+		for(int i=0; i<n; i++) {
+			for(int e : m[i]) {
+				System.out.print(e + " ");
+			}
+			if(i < n - 1) {
+				System.out.print("\n  ");
+			}
+		}
+		System.out.print("]");
 	}
 	
 	public void addPaquet(Paquet paquet) {
