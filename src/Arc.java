@@ -1,10 +1,13 @@
+import java.util.ArrayList;
+import java.util.NoSuchElementException;
+
 public class Arc {
     private Noeud depart;
     private Noeud fin;
     private int capacite;
     private int longueur;
     private ArrayList<Paquet> listePaquet;
-    private ArrayList<int> listePosition;
+    private ArrayList<Integer> listePosition;
 
     public Arc(Noeud depart, Noeud fin, int capacite, int longueur) {
         this.depart = depart;
@@ -12,7 +15,7 @@ public class Arc {
         this.capacite = 1;
         this.longueur = longueur;
         this.listePaquet=new ArrayList<Paquet>();
-        this.listePosition=new ArrayList<int>();
+        this.listePosition=new ArrayList<Integer>();
     }
 
     //Renvoie la capacité
@@ -44,21 +47,22 @@ public class Arc {
         return listePaquet.size()<=capacite;
     }
     //vérifie si l'arc est vide
-    public boolean isEmpty() {
-        return listePaquet.isEmpty();
-    }
+    public boolean isEmpty() { return listePaquet.isEmpty(); }
     //Enlever un paquet
     public Paquet removePaquet(int i) {
         if (!this.isEmpty()) {
             listePosition.remove(i);
             return listePaquet.remove(i);
         }
+        else{
+            throw (new NoSuchElementException());
+        }
     }
     // retourne -1 s'il n'y a rien
     public int refresh(){
-        for (int i=0,i<listePosition.size(),i++){
-            listePosition[i]++;
-            if (listePosition[i]==longueur){
+        for (int i=0;i<listePosition.size();i++){
+            listePosition.set(i,listePosition.get(i)+1);
+            if (listePosition.get(i)==longueur){
                 return i;
             }
         }
