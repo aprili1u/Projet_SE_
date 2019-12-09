@@ -23,7 +23,7 @@ public class PriorityQ  {
             }
             Integer i= this.size;
             this.size++;
-            while(i>0 && this.queue[(i-1)/2].getPriority() <= e.getPriority()) {
+            while(i>0 && this.queue[(i-1)/2].getPriority() < e.getPriority()) {
                 this.queue[i] = this.queue[(i-1)/2];
                 i = (i-1)/2;
             }

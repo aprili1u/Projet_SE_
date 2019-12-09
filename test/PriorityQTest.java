@@ -1,4 +1,3 @@
-import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 //require Junit4 to run
@@ -6,7 +5,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class PriorityQTest {
-    @Test
+    @org.junit.jupiter.api.Test
     public void insertElementTest() {
         PriorityQ F = new PriorityQ(50);
         Paquet p = new Paquet(null,null,50,null);
@@ -15,7 +14,7 @@ class PriorityQTest {
     }
 
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void popElementTest() {
         PriorityQ F = new PriorityQ(50);
         Paquet p = new Paquet(null,null,50,null);
@@ -29,7 +28,7 @@ class PriorityQTest {
         assertEquals(F.size(), s - 1);
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void isEmptyTest() {
         PriorityQ F = new PriorityQ(10);
         Paquet p = new Paquet(null,null,50,null);
@@ -39,7 +38,7 @@ class PriorityQTest {
         assertEquals(F.isEmpty(), true);
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void sizeTest() {
         PriorityQ F = new PriorityQ(10);
         assertEquals(F.size(), 0);
@@ -51,15 +50,14 @@ class PriorityQTest {
         F.popElement();
         assertEquals(F.size(), 1);
     }
-    @Test
+    @org.junit.jupiter.api.Test
     public void toStringTest() {
         PriorityQ F = new PriorityQ(3);
         Paquet p = new Paquet(null,null,50,null);
         Paquet p1 = new Paquet(null,null,50,null);
         F.insertElement(p);
         F.insertElement(p1);
-        assertEquals(F.toString(),"[5, 2, null]");
-
+        assertEquals("["+p.toString()+", "+p1.toString()+", null]", F.toString());
     }
 
 }
