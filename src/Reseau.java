@@ -14,7 +14,7 @@ public class Reseau {
 		this.noeuds = new ArrayList<Noeud>();
 	}
 	
-	private int[][] arcToMatrix() {
+	public int[][] arcToMatrix() {
 		// Construction de la matrice d'adjacence
 		int n = this.arcs.size();
 		int adjacentMatrix[][] = new int[n][n];
@@ -32,22 +32,22 @@ public class Reseau {
 		return adjacentMatrix;
 	}
 	
-	private void addPaquet(Paquet paquet) {
+	public void addPaquet(Paquet paquet) {
 		// Mise a jour de paquets[]
 		this.paquets.add(paquet);
 	}
 	
-	private void addArc(Arc arc) {
+	public void addArc(Arc arc) {
 		// Mise a jour de arcs[]
 		this.arcs.add(arc);
 	}
 	
-	private void addNoeud(Noeud noeud) {
+	public void addNoeud(Noeud noeud) {
 		// Mise a jour de noeuds[]
 		this.noeuds.add(noeud);
 	}
 
-	private void removePaquet(Paquet paquet) {
+	public void removePaquet(Paquet paquet) {
 		// Mise a jour de paquets[]
 		for(int i=0; i<paquets.size(); i++) {
 			if(paquets.get(i) == paquet) {
@@ -58,7 +58,7 @@ public class Reseau {
 		return;
 	}
 	
-	private void removeArc(Arc arc) {
+	public void removeArc(Arc arc) {
 		// Mise a jour de arcs[]
 		for(int i=0; i<arcs.size(); i++) {
 			if(arcs.get(i) == arc) {
@@ -69,7 +69,7 @@ public class Reseau {
 		return;
 	}
 	
-	private void removeNoeud(Noeud noeud) {
+	public void removeNoeud(Noeud noeud) {
 		// Mise a jour de noeuds[]
 		for(int i=0; i<noeuds.size(); i++) {
 			if(noeuds.get(i) == noeud) {
@@ -80,17 +80,17 @@ public class Reseau {
 		return;
 	}
 	
-	private void tic() {
+	public void tic() {
 		// Ecoulement du temps
 		this.temps++;
 	}
 	
-	private void deplacerPaquet(Paquet paquet, int path[]) {
+	public void deplacerPaquet(Paquet paquet, int path[]) {
 		// Mise a jour arcs[], noeuds[] et paquets[]
 		return;
 	}
 	
-	private int[] plusCourtChemin(Paquet paquet) {
+	public int[] plusCourtChemin(Paquet paquet) {
 		// Calcul du plus court chemin
 		int n = this.arcs.size();
 		Noeud dep = paquet.getNoeudDepart();
