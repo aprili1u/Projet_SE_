@@ -1,26 +1,30 @@
+import java.util.ArrayList;
+
 public class Reseau {
-	private Paquet paquets[];
-	private Arc arcs[];
-	private Noeud noeuds[];
+	private ArrayList<Paquet> paquets;
+	private ArrayList<Arc> arcs;
+	private ArrayList<Noeud> noeuds;
 	private int temps;
 	private int tauxActualisation;
 	
 	public Reseau() {
 		// Constructeur
-		Paquet paquets[] = new Paquet[];
-		Arc arcs[] = new Arc[];
-		Noeud noeuds[] = new Noeud[];
+		this.paquets = new ArrayList<Paquet>();
+		this.arcs = new ArrayList<Arc>();
+		this.noeuds = new ArrayList<Noeud>();
 	}
 	
 	private int[][] arcToMatrix() {
 		// Construction de la matrice d'adjacence
-		n = this.arcs.length;
-		int adjacentMatrix[n][n] = new int[n][n];
+		int n = this.arcs.size();
+		int adjacentMatrix[][] = new int[n][n];
 		for(int i=0; i<n; i++) {
 			for(int j=0; j<n; j++) {
-				Arc arc = new Arc(i, j);
-				if(arc in this.arcs[]) {
-					adjacentMatrix[i][j] = 1;
+				Arc arc = new Arc(this.noeuds.get(i), this.noeuds.get(j), 1, 1);
+				for(Arc a : this.arcs) {
+					if (a == arc) {
+						adjacentMatrix[i][j] = 1;
+					}
 				}
 				adjacentMatrix[i][j] = 0;
 			}
@@ -30,24 +34,24 @@ public class Reseau {
 	
 	private void addPaquet(Paquet paquet) {
 		// Mise a jour de paquets[]
-		this.paquets.append(paquet);
+		this.paquets.add(paquet);
 	}
 	
 	private void addArc(Arc arc) {
 		// Mise a jour de arcs[]
-		this.arcs.append(arc);
+		this.arcs.add(arc);
 	}
 	
 	private void addNoeud(Noeud noeud) {
 		// Mise a jour de noeuds[]
-		this.noeuds.append(noeud);
+		this.noeuds.add(noeud);
 	}
-	
+
 	private void removePaquet(Paquet paquet) {
 		// Mise a jour de paquets[]
-		for(int i=0; i<paquets.length; i++) {
-			if(paquets[i] == paquet) {
-				this.paquets.pop(i);
+		for(int i=0; i<paquets.size(); i++) {
+			if(paquets.get(i) == paquet) {
+				this.paquets.remove(i);
 				return;
 			}
 		}
@@ -56,9 +60,9 @@ public class Reseau {
 	
 	private void removeArc(Arc arc) {
 		// Mise a jour de arcs[]
-		for(int i=0; i<arcs.length; i++) {
-			if(arcs[i] == arc) {
-				this.arcs.pop(i);
+		for(int i=0; i<arcs.size(); i++) {
+			if(arcs.get(i) == arc) {
+				this.arcs.remove(i);
 				return;
 			}
 		}
@@ -67,9 +71,9 @@ public class Reseau {
 	
 	private void removeNoeud(Noeud noeud) {
 		// Mise a jour de noeuds[]
-		for(int i=0; i<noeuds.length; i++) {
-			if(noeuds[i] == noeud) {
-				this.noeuds.pop(i);
+		for(int i=0; i<noeuds.size(); i++) {
+			if(noeuds.get(i) == noeud) {
+				this.noeuds.remove(i);
 				return;
 			}
 		}
@@ -88,11 +92,10 @@ public class Reseau {
 	
 	private int[] plusCourtChemin(Paquet paquet) {
 		// Calcul du plus court chemin
-		n = this.arcs.length;
-		dep = paquet.getNoeudDepart();
-		dest = paquet.getNoeudDestination();
-		int nullMatrix[n][n] = new int[n][n];
-		while()
-		return path;
+		int n = this.arcs.size();
+		Noeud dep = paquet.getNoeudDepart();
+		Noeud dest = paquet.getNoeudDestination();
+		int nullMatrix[][] = new int[n][n];
+		return new int[2];
 	}
 }
