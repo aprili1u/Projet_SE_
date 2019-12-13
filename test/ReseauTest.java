@@ -36,11 +36,11 @@ public class ReseauTest {
         r.addArc(a2);
         r.addArc(a3);
         r.addArc(a4);
-        Paquet p = new Paquet(n0, n1, 1, new Noeud[2]);
+        Paquet p = new Paquet(1, n0, n1, 1, new ArrayList<Noeud>());
         r.addPaquet(p);
-        //System.out.println("Arcs: " + r.getArcs());
-        //System.out.println("Noeuds: " + r.getNoeuds());
-        //System.out.println("Paquets: " + r.getPaquets());
+        /*System.out.println("Arcs: " + r.getArcs());
+        System.out.println("Noeuds: " + r.getNoeuds());
+        System.out.println("Paquets: " + r.getPaquets());*/
         System.out.println("Matrice d'adjacence:");
         r.printMatrix(r.arcToMatrix());
     }
