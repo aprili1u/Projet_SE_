@@ -43,5 +43,10 @@ public class ReseauTest {
         System.out.println("Paquets: " + r.getPaquets());*/
         System.out.println("Matrice d'adjacence:");
         r.printMatrix(r.arcToMatrix());
+        ArrayList<Noeud> path = r.plusCourtChemin(p);
+        System.out.println("Path:");
+        for(Noeud node : path) {
+            System.out.println(node.getID());
+        }
     }
 }
