@@ -34,11 +34,10 @@ public class Reseau {
 			for(int j=0; j<n; j++) {
 				Arc arc = new Arc(this.noeuds.get(i), this.noeuds.get(j), 1, 1);
 				for(Arc a : this.arcs) {
-					if (a == arc) {
+					if (a.getDepart() == arc.getDepart() && a.getFin() == arc.getFin()) {
 						adjacentMatrix[i][j] = 1;
 					}
 				}
-				adjacentMatrix[i][j] = 0;
 			}
 		}
 		return adjacentMatrix;
