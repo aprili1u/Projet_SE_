@@ -83,7 +83,7 @@ public class Reseau {
 		return null;
 	}
 
-	public ArrayList<Arc> getArcsFromNode(Noeud depart) {
+	public ArrayList<Arc> getAfterArcsFromNode(Noeud depart) {
 		ArrayList<Arc> relatedArcs = new ArrayList<Arc>();
 		for(Arc a : this.arcs) {
 			if(a.getDepart() == depart) {
@@ -93,47 +93,98 @@ public class Reseau {
 		return relatedArcs;
 	}
 
-	public ArrayList<Noeud> getNeighbours(Noeud node) {
+	public ArrayList<Arc> getBeforeArcsFromNode(Noeud fin) {
+		ArrayList<Arc> relatedArcs = new ArrayList<Arc>();
+		for(Arc a : this.arcs) {
+			if(a.getFin() == fin) {
+				relatedArcs.add(a);
+			}
+		}
+		return relatedArcs;
+	}
+
+	public ArrayList<Noeud> getAfterNeighbours(Noeud node) {
 		ArrayList<Noeud> neighbours = new ArrayList<Noeud>();
-		for(Arc a : getArcsFromNode(node)) {
+		for(Arc a : getAfterArcsFromNode(node)) {
 			neighbours.add(a.getFin());
+		}
+		return neighbours;
+	}
+
+	public ArrayList<Noeud> getBeforeNeighbours(Noeud node) {
+		ArrayList<Noeud> neighbours = new ArrayList<Noeud>();
+		for(Arc a : getBeforeArcsFromNode(node)) {
+			neighbours.add(a.getDepart());
 		}
 		return neighbours;
 	}
 
 	public ArrayList<Noeud> plusCourtChemin(Paquet paquet) {
 		// Calcul du plus court chemin
+		Noeud dep = paquet.getNoeudDepart();
+		Noeud dest = paquet.getNoeudDestination();
+		if(getAfterNeighbours(dep).isEmpty() || getBeforeNeighbours(dest).isEmpty()) {
+			return null;
+		}
 		int n = this.noeuds.size();
 		int weights[] = new int[n];
 		Noeud predecessors[] = new Noeud[n];
 		int adjacentMatrix[][] = arcToMatrix();
 		ArrayList<Noeud> visitedNodes = new ArrayList<Noeud>();
 		ArrayList<Noeud> path = new ArrayList<Noeud>();
-		Noeud dep = paquet.getNoeudDepart();
-		Noeud dest = paquet.getNoeudDestination();
 		for(Noeud node : this.noeuds) {
+			//System.out.println(node.getID());
 			weights[node.getID()] = -1;
+			//System.out.println(weights[node.getID()]);
+		}
+		/*for(int i : weights) {
+			System.out.println(i);
+		}*/
+		for(Noeud node : this.noeuds) {
+			predecessors[node.getID()] = null;
 		}
 		weights[dep.getID()] = 0;
-		for(Noeud node : getNeighbours(dep)) {
+		for(Noeud node : getAfterNeighbours(dep)) {
 			weights[node.getID()] = getArcFromNodes(dep, node).getLongueur();
+			predecessors[node.getID()] = dep;
 		}
+		/*for(int i : weights) {
+			System.out.println(i);
+		}*/
 		int min;
-		Noeud minNode;
+		Noeud minNode = null;
 		int minNodeWeight;
 		int currentNodeWeight;
 		int additionalWeight;
-		while(visitedNodes.size() < n) {
-			minNode = this.noeuds.get(0);
-			min = -1;
+		int loop = 0;
+		while(minNode != dest) {
+			minNode = null;
+			min = 1000000000;
 			for (Noeud node : this.noeuds) {
-				if (!visitedNodes.contains(node) && (min == -1 || weights[node.getID()] < min)) {
+				int weight = weights[node.getID()];
+				if (!visitedNodes.contains(node) && weight >= 0 && weight < min && (node != dep || loop == 0)) {
 					minNode = node;
 					min = weights[node.getID()];
 				}
 			}
+			if(minNode == null) {
+				return null;
+			}
 			visitedNodes.add(minNode);
-			for (Noeud node : getNeighbours(minNode)) {
+			/*if(minNode != dest) {
+				System.out.println(minNode.getID());
+				int cmpt = 0;
+				int size = getAfterNeighbours(minNode).size();
+				for (Noeud node : getAfterNeighbours(minNode)) {
+					if (visitedNodes.contains(node)) {
+						cmpt++;
+					}
+				}
+				if (cmpt == size) {
+					return null;
+				}
+			}*/
+			for (Noeud node : getAfterNeighbours(minNode)) {
 				minNodeWeight = weights[minNode.getID()];
 				currentNodeWeight = weights[node.getID()];
 				additionalWeight = getArcFromNodes(minNode, node).getLongueur();
@@ -142,12 +193,16 @@ public class Reseau {
 					predecessors[node.getID()] = minNode;
 				}
 			}
+			loop++;
 		}
 		Noeud current = dest;
+		Noeud predecessor;
 		while(current != dep) {
 			path.add(current);
-			current = predecessors[current.getID()];
+			predecessor = predecessors[current.getID()];
+			current = predecessor;
 		}
+		path.add(dep);
 		return path;
 	}
 
