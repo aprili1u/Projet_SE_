@@ -30,13 +30,17 @@ public class ReseauTest {
         Arc a1 = new Arc(n0, n2, 1, 1);
         Arc a2 = new Arc(n2, n4, 1, 1);
         Arc a3 = new Arc(n4, n5, 1, 1);
-        Arc a4 = new Arc(n1, n6, 1, 1);
+        Arc a4 = new Arc(n6, n7, 1, 1);
+        Arc a5 = new Arc(n2, n6, 1, 3);
+        Arc a6 = new Arc(n5, n7, 1, 1);
         r.addArc(a0);
         r.addArc(a1);
         r.addArc(a2);
         r.addArc(a3);
         r.addArc(a4);
-        Paquet p = new Paquet(1, n0, n1, 1, new ArrayList<Noeud>());
+        r.addArc(a5);
+        r.addArc(a6);
+        Paquet p = new Paquet(1, n0, n7, 1, new ArrayList<Noeud>());
         r.addPaquet(p);
         /*System.out.println("Arcs: " + r.getArcs());
         System.out.println("Noeuds: " + r.getNoeuds());
@@ -45,8 +49,15 @@ public class ReseauTest {
         r.printMatrix(r.arcToMatrix());
         ArrayList<Noeud> path = r.plusCourtChemin(p);
         System.out.println("Path:");
-        for(Noeud node : path) {
-            System.out.println(node.getID());
+        //System.out.println(path.toString());
+        if(path == null) {
+            System.out.println("Pas de chemin possible");
+            return;
         }
+        for(Noeud node : path.subList(0, path.size()-1)) {
+            System.out.print(node.getID());
+            System.out.print(" <- ");
+        }
+        System.out.println(path.get(path.size()-1).getID());
     }
 }
