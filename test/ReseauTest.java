@@ -59,5 +59,18 @@ public class ReseauTest {
             System.out.print(" <- ");
         }
         System.out.println(path.get(path.size()-1).getID());
+        r.removeNoeud(n5);
+        path = r.plusCourtChemin(p);
+        System.out.println("Path:");
+        //System.out.println(path.toString());
+        if(path == null) {
+            System.out.println("Pas de chemin possible");
+            return;
+        }
+        for(Noeud node : path.subList(0, path.size()-1)) {
+            System.out.print(node.getID());
+            System.out.print(" <- ");
+        }
+        System.out.println(path.get(path.size()-1).getID());
     }
 }
