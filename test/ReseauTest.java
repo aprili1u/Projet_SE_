@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ReseauTest {
 
     @org.junit.jupiter.api.Test
-    void simpleTest() {
-        System.out.println("Hello world");
+    public void plusCourtCheminTest() {
+        //System.out.println("Hello world");
         Reseau r = new Reseau();
         System.out.println("Arcs: " + r.getArcs());
         System.out.println("Noeuds: " + r.getNoeuds());
@@ -47,6 +47,7 @@ public class ReseauTest {
         System.out.println("Paquets: " + r.getPaquets());*/
         System.out.println("Matrice d'adjacence:");
         r.printMatrix(r.arcToMatrix());
+
         ArrayList<Noeud> path = r.plusCourtChemin(p);
         System.out.println("Path:");
         //System.out.println(path.toString());
@@ -56,10 +57,12 @@ public class ReseauTest {
         }
         for(Noeud node : path.subList(0, path.size()-1)) {
             System.out.print(node.getID());
-            System.out.print(" <- ");
+            System.out.print(" -> ");
         }
         System.out.println(path.get(path.size()-1).getID());
+
         r.removeNoeud(n5);
+
         path = r.plusCourtChemin(p);
         System.out.println("Path:");
         //System.out.println(path.toString());
@@ -69,8 +72,16 @@ public class ReseauTest {
         }
         for(Noeud node : path.subList(0, path.size()-1)) {
             System.out.print(node.getID());
-            System.out.print(" <- ");
+            System.out.print(" -> ");
         }
         System.out.println(path.get(path.size()-1).getID());
     }
+
+    /*@org.junit.jupiter.api.Test
+    public void runTest() throws InterruptedException {
+        Reseau r = new Reseau();
+        r.run();
+    }*/
+
+
 }
