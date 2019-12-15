@@ -3,7 +3,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ReseauTest {
 
-    @org.junit.jupiter.api.Test
+    /*@org.junit.jupiter.api.Test
     public void plusCourtCheminTest() {
         //System.out.println("Hello world");
         Reseau r = new Reseau();
@@ -42,9 +42,9 @@ public class ReseauTest {
         r.addArc(a6);
         Paquet p = new Paquet(1, n0, n7, 1, new ArrayList<Noeud>());
         r.addPaquet(p);
-        /*System.out.println("Arcs: " + r.getArcs());
+        System.out.println("Arcs: " + r.getArcs());
         System.out.println("Noeuds: " + r.getNoeuds());
-        System.out.println("Paquets: " + r.getPaquets());*/
+        System.out.println("Paquets: " + r.getPaquets());
         System.out.println("Matrice d'adjacence:");
         r.printMatrix(r.arcToMatrix());
 
@@ -75,6 +75,58 @@ public class ReseauTest {
             System.out.print(" -> ");
         }
         System.out.println(path.get(path.size()-1).getID());
+    }*/
+
+    @org.junit.jupiter.api.Test
+    void trajetPaquetTest() throws InterruptedException {
+        Reseau r = new Reseau();
+        Noeud n0 = new Noeud(0);
+        Noeud n1 = new Noeud(1);
+        r.addNoeud(n0);
+        r.addNoeud(n1);
+        Arc a0 = new Arc(n0, n1, 1, 1);
+        r.addArc(a0);
+        ArrayList<Noeud> path = new ArrayList<>();
+        path.add(n0);
+        path.add(n1);
+        Paquet p0 = new Paquet(0, n0, n1, 50, path);
+        r.addPaquet(p0);
+        while(p0.getNoeudPosition() != p0.getNoeudDestination()) {
+            System.out.println("Temps: " + r.getTemps());
+            System.out.println("Position courante: " + p0.getNoeudPosition().getID());
+            System.out.println("Queue n0: "+ n0.getQueue());
+            System.out.println("Size n0: " + n0.getQueue().size());
+            System.out.println("Queue n1: "+ n1.getQueue());
+            System.out.println("Size n1: " + n1.getQueue().size());
+            System.out.println("Arc: " + a0.getListePaquet());
+            System.out.println("Position: " + a0.getListePosition());
+            System.out.println("Longueur: " + a0.getLongueur());
+            System.out.println("");
+            r.refreshNoeuds();
+            Thread.sleep(1000);
+            System.out.println("Temps: " + r.getTemps());
+            System.out.println("Position courante: " + p0.getNoeudPosition().getID());
+            System.out.println("Queue n0: "+ n0.getQueue());
+            System.out.println("Size n0: " + n0.getQueue().size());
+            System.out.println("Queue n1: "+ n1.getQueue());
+            System.out.println("Size n1: " + n1.getQueue().size());
+            System.out.println("Arc: " + a0.getListePaquet());
+            System.out.println("Position: " + a0.getListePosition());
+            System.out.println("Longueur: " + a0.getLongueur());
+            System.out.println("");
+            r.refreshArcs();
+            Thread.sleep(1000);
+        }
+        System.out.println("Temps: " + r.getTemps());
+        System.out.println("Position courante: " + p0.getNoeudPosition().getID());
+        System.out.println("Queue n0: "+ n0.getQueue());
+        System.out.println("Size n0: " + n0.getQueue().size());
+        System.out.println("Queue n1: "+ n1.getQueue());
+        System.out.println("Size n1: " + n1.getQueue().size());
+        System.out.println("Arc: " + a0.getListePaquet());
+        System.out.println("Position: " + a0.getListePosition());
+        System.out.println("Longueur: " + a0.getLongueur());
+        System.out.println("");
     }
 
     /*@org.junit.jupiter.api.Test
@@ -82,6 +134,5 @@ public class ReseauTest {
         Reseau r = new Reseau();
         r.run();
     }*/
-
 
 }
