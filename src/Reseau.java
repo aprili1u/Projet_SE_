@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Reseau {
 	private ArrayList<Paquet> paquets;
@@ -12,6 +13,8 @@ public class Reseau {
 		this.paquets = new ArrayList<Paquet>();
 		this.arcs = new ArrayList<Arc>();
 		this.noeuds = new ArrayList<Noeud>();
+		this.temps = 0;
+		this.tauxActualisation = 1;
 	}
 
 	public ArrayList<Paquet> getPaquets() {
@@ -28,7 +31,7 @@ public class Reseau {
 		// Mise a jour de paquets[]
 		assert(!this.paquets.contains(paquet));
 		for(Paquet p : this.paquets) {
-			//assert(p.getID() != p.getID());
+			assert(p.getId() != p.getId());
 		}
 		this.paquets.add(paquet);
 	}
@@ -125,15 +128,18 @@ public class Reseau {
 		// Calcul du plus court chemin
 		Noeud dep = paquet.getNoeudDepart();
 		Noeud dest = paquet.getNoeudDestination();
+
 		if(getAfterNeighbours(dep).isEmpty() || getBeforeNeighbours(dest).isEmpty()) {
 			return null;
 		}
+
 		int n = this.noeuds.size();
 		int weights[] = new int[n];
 		Noeud predecessors[] = new Noeud[n];
 		int adjacentMatrix[][] = arcToMatrix();
 		ArrayList<Noeud> visitedNodes = new ArrayList<Noeud>();
 		ArrayList<Noeud> path = new ArrayList<Noeud>();
+
 		for(Noeud node : this.noeuds) {
 			weights[this.noeuds.indexOf(node)] = -1;
 		}
@@ -145,15 +151,18 @@ public class Reseau {
 			weights[node.getID()] = getArcFromNodes(dep, node).getLongueur();
 			predecessors[this.noeuds.indexOf(node)] = dep;
 		}
+
 		int min;
 		Noeud minNode = null;
 		int minNodeWeight;
 		int currentNodeWeight;
 		int additionalWeight;
 		int loop = 0;
+
 		while(minNode != dest) {
 			minNode = null;
 			min = 1000000000;
+
 			for (Noeud node : this.noeuds) {
 				int weight = weights[this.noeuds.indexOf(node)];
 				if (!visitedNodes.contains(node) && weight >= 0 && weight < min && (node != dep || loop == 0)) {
@@ -165,6 +174,7 @@ public class Reseau {
 				return null;
 			}
 			visitedNodes.add(minNode);
+
 			for (Noeud node : getAfterNeighbours(minNode)) {
 				minNodeWeight = weights[this.noeuds.indexOf(minNode)];
 				currentNodeWeight = weights[this.noeuds.indexOf(node)];
@@ -176,6 +186,7 @@ public class Reseau {
 			}
 			loop++;
 		}
+
 		Noeud current = dest;
 		Noeud predecessor;
 		while(current != dep) {
@@ -184,6 +195,7 @@ public class Reseau {
 			current = predecessor;
 		}
 		path.add(dep);
+		Collections.reverse(path);
 		return path;
 	}
 
@@ -222,7 +234,6 @@ public class Reseau {
 		// Mise a jour arcs[], noeuds[] et paquets[]
 		// Probleme: comment metre a jour la position du paquet dans l'arc sans
 		// avoir acces a la taille de l'arc
-		return;
 	}
 
 	public void refresh() {
@@ -231,5 +242,14 @@ public class Reseau {
 			a.refresh();
 		}
 		this.temps++;
+	}
+
+	public void run() throws InterruptedException {
+		// Fonction principale appelée par l'interface graphique
+		while(true) {
+			this.refresh();
+			System.out.println("Loop");
+			Thread.sleep(this.tauxActualisation);
+		}
 	}
 }
