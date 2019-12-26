@@ -34,7 +34,7 @@ public class Reseau {
 		// Mise a jour de paquets[]
 		assert(!this.paquets.contains(paquet));
 		for(Paquet p : this.paquets) {
-			assert(p.getId() != p.getId());
+			assert(paquet.getId() != p.getId());
 		}
 		this.paquets.add(paquet);
 		for(Noeud noeud : this.noeuds) {
@@ -275,7 +275,7 @@ public class Reseau {
 		int[][] adjacentMatrix = new int[n][n];
 		for(int i=0; i<n; i++) {
 			for(int j=0; j<n; j++) {
-				Arc arc = new Arc(this.noeuds.get(i), this.noeuds.get(j), 1, 1);
+				Arc arc = new Arc(1000000, this.noeuds.get(i), this.noeuds.get(j), 1, 1);
 				for(Arc a : this.arcs) {
 					if (a.getDepart() == arc.getDepart() && a.getFin() == arc.getFin()) {
 						adjacentMatrix[i][j] = 1;
@@ -316,16 +316,17 @@ public class Reseau {
 		// Mise a jour arcs[], noeuds[] et paquets[]
 		// Probleme: comment metre a jour la position du paquet dans l'arc sans
 		// avoir acces a la taille de l'arc
-		if(paquet.getNoeudPosition() == paquet.getNoeudDestination()) {
-			this.removePaquet(paquet);
-			return;
-		}
 		for (int i=0; i<paquet.getTrajet().size(); i++) {
 			Noeud current = paquet.getTrajet().get(i);
 			if (current == paquet.getNoeudPosition()) {
 				Noeud next = paquet.getTrajet().get(i+1);
-				next.enterPaquet(paquet);
 				paquet.setNoeudPosition(next);
+				if(next == paquet.getNoeudDestination()) {
+
+					this.removePaquet(paquet);
+					return;
+				}
+				next.enterPaquet(paquet);
 				break;
 			}
 		}
@@ -356,6 +357,21 @@ public class Reseau {
 		this.refreshNoeuds();
 		this.refreshArcs();
 		this.temps++;
+	}
+
+	public void paquetsGeneration(int num, boolean random){
+		for(int i=0; i<num; i++){
+			Noeud dep = this.noeuds.get((int) Math.round(Math.random() * (this.noeuds.size()-1)));
+			Noeud dest = this.noeuds.get((int) Math.round(Math.random() * (this.noeuds.size()-1)));
+			int priority = (int) Math.round(Math.random() * 5);
+			this.addPaquet(new Paquet(i, dep, dest, priority, new ArrayList<>()));
+			ArrayList<Noeud> path;
+			if(random) {
+				path = randomPath(this.getPaquets().get(i));
+			} else
+				path = plusCourtChemin(this.getPaquets().get(i));
+			this.getPaquets().get(i).setTrajet(path);
+		}
 	}
 
 	public void run() throws InterruptedException {
