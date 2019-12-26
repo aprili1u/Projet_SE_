@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Collections;
+import java.lang.Math;
 
 public class Reseau {
 	private ArrayList<Paquet> paquets;
@@ -190,6 +191,68 @@ public class Reseau {
 					weights[this.noeuds.indexOf(node)] = minNodeWeight + additionalWeight;
 					predecessors[this.noeuds.indexOf(node)] = minNode;
 				}
+			}
+			loop++;
+		}
+
+		Noeud current = dest;
+		Noeud predecessor;
+		while(current != dep) {
+			path.add(current);
+			predecessor = predecessors[this.noeuds.indexOf(current)];
+			current = predecessor;
+		}
+		path.add(dep);
+		Collections.reverse(path);
+		return path;
+	}
+
+	public ArrayList<Noeud> randomPath(Paquet paquet) {
+		// Calcul d'un chemin aléatoire
+		Noeud dep = paquet.getNoeudDepart();
+		Noeud dest = paquet.getNoeudDestination();
+
+		if(getAfterNeighbours(dep).isEmpty() || getBeforeNeighbours(dest).isEmpty()) {
+			return null;
+		}
+
+		int n = this.noeuds.size();
+		int[] weights = new int[n];
+		Noeud[] predecessors = new Noeud[n];
+		ArrayList<Noeud> visitedNodes = new ArrayList<>();
+		ArrayList<Noeud> path = new ArrayList<>();
+
+		for(Noeud node : this.noeuds) {
+			weights[this.noeuds.indexOf(node)] = -1;
+		}
+		for(Noeud node : this.noeuds) {
+			predecessors[this.noeuds.indexOf(node)] = null;
+		}
+		weights[dep.getID()] = 0;
+		for(Noeud node : getAfterNeighbours(dep)) {
+			weights[node.getID()] = 0;
+			predecessors[this.noeuds.indexOf(node)] = dep;
+		}
+
+		Noeud nextNode = null;
+		int loop = 0;
+
+		while(nextNode != dest) {
+			if(visitedNodes.size() == this.noeuds.size()){
+				return null;
+			}
+
+			nextNode = this.noeuds.get((int) Math.round(Math.random() * (this.noeuds.size()-1)));
+			int weight = weights[this.noeuds.indexOf(nextNode)];
+			while (visitedNodes.contains(nextNode) || weight < 0 || (nextNode == dep && loop != 0)){
+				nextNode = this.noeuds.get((int) Math.round(Math.random() * (this.noeuds.size()-1)));
+				weight = weights[this.noeuds.indexOf(nextNode)];
+			}
+			visitedNodes.add(nextNode);
+
+			for (Noeud node : getAfterNeighbours(nextNode)) {
+				weights[this.noeuds.indexOf(node)] = 0;
+				predecessors[this.noeuds.indexOf(node)] = nextNode;
 			}
 			loop++;
 		}
