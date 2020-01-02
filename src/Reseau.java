@@ -8,9 +8,12 @@ public class Reseau {
 	private ArrayList<Noeud> noeuds;
 	private int temps;
 	private int tauxActualisation;
-	
+
 	public Reseau() {
-		// Constructeur
+		/* Constructeur
+		Entree : void
+		Sortie : Reseau
+		*/
 		this.paquets = new ArrayList<>();
 		this.arcs = new ArrayList<>();
 		this.noeuds = new ArrayList<>();
@@ -19,19 +22,42 @@ public class Reseau {
 	}
 
 	public ArrayList<Paquet> getPaquets() {
+		/* Acces aux paquets du reseau
+		Entree : void
+		Sortie : ArrayList<Paquet>
+		 */
 		return this.paquets;
 	}
 
-	public ArrayList<Arc> getArcs() { return this.arcs; }
+	public ArrayList<Arc> getArcs() {
+		/* Acces aux arcs du reseau
+		Entree : void
+		Sortie : ArrayList<Arc>
+		*/
+		return this.arcs;
+	}
 
 	public ArrayList<Noeud> getNoeuds() {
+		/* Acces aux noeuds du reseau
+		Entree : void
+		Sortie : ArrayList<Noeud>
+		 */
 		return this.noeuds;
 	}
 
-	public int getTemps() { return this.temps; }
+	public int getTemps() {
+		/* Acces au temps du reseau
+		Entree : void
+		Sortie : int
+		 */
+		return this.temps;
+	}
 
 	public void addPaquet(Paquet paquet) {
-		// Mise a jour de paquets[]
+		/* Ajout d'un paquet au reseau
+		Entree : Paquet
+		Sortie : void
+		 */
 		assert(!this.paquets.contains(paquet));
 		for(Paquet p : this.paquets) {
 			assert(paquet.getId() != p.getId());
@@ -46,7 +72,10 @@ public class Reseau {
 	}
 
 	public void addArc(Arc arc) {
-		// Mise a jour de arcs[]
+		/* Ajout d'un arc au reseau
+		Entree : Arc
+		Sortie : void
+		 */
 		assert(!this.arcs.contains(arc));
 		for(Arc a : this.arcs) {
 			assert(a.getDepart() != arc.getDepart() || a.getFin() != arc.getFin());
@@ -56,7 +85,10 @@ public class Reseau {
 	}
 
 	public void addNoeud(Noeud noeud) {
-		// Mise a jour de noeuds[]
+		/* Ajout d'un noeud au reseau
+		Entree : Noeud
+		Sortie : void
+		 */
 		assert(!this.noeuds.contains(noeud));
 		for(Noeud n : this.noeuds) {
 			assert(!n.getID().equals(noeud.getID()));
@@ -65,19 +97,28 @@ public class Reseau {
 	}
 
 	public void removePaquet(Paquet paquet) {
-		// Mise a jour de paquets[]
+		/* Retrait d'un paquet du reseau
+		Entree : Paquet
+		Sortie : void
+		 */
 		assert(this.paquets.contains(paquet));
 		this.paquets.remove(paquet);
 	}
 
 	public void removeArc(Arc arc) {
-		// Mise a jour de arcs[]
+		/* Retrait d'un arc du reseau
+		Entree : Arc
+		Sortie : void
+		 */
 		assert(this.arcs.contains(arc));
 		this.arcs.remove(arc);
 	}
 
 	public void removeNoeud(Noeud noeud) {
-		// Mise a jour de noeuds[]
+		/* Retrait d'un noeud du reseau
+		Entree : Noeud
+		Sortie : void
+		 */
 		assert(this.noeuds.contains(noeud));
 		this.noeuds.remove(noeud);
 		for(Arc a : getBeforeArcsFromNode(noeud)) {
@@ -89,6 +130,10 @@ public class Reseau {
 	}
 
 	public Arc getArcFromNodes(Noeud depart, Noeud fin) {
+		/* Acces a un arc a partir de ses extremites
+		Entree : Noeud, Noeud
+		Sortie : Arc
+		 */
 		for(Arc a : this.arcs) {
 			if(a.getDepart() == depart && a.getFin() == fin) {
 				return a;
@@ -98,6 +143,10 @@ public class Reseau {
 	}
 
 	public ArrayList<Arc> getAfterArcsFromNode(Noeud depart) {
+		/* Acces aux arcs sortants d'un noeud
+		Entree : Noeud
+		Sortie : ArrayList<Arc>
+		 */
 		ArrayList<Arc> relatedArcs = new ArrayList<>();
 		for(Arc a : this.arcs) {
 			if(a.getDepart() == depart) {
@@ -108,6 +157,10 @@ public class Reseau {
 	}
 
 	public ArrayList<Arc> getBeforeArcsFromNode(Noeud fin) {
+		/* Acces aux arcs entrants d'un noeud
+		Entree : Noeud
+		Sortie : ArrayList<Arc>
+		 */
 		ArrayList<Arc> relatedArcs = new ArrayList<>();
 		for(Arc a : this.arcs) {
 			if(a.getFin() == fin) {
@@ -118,6 +171,10 @@ public class Reseau {
 	}
 
 	public ArrayList<Noeud> getAfterNeighbours(Noeud node) {
+		/* Acces aux noeuds suivant un autre noeud
+		Entree : Noeud
+		Sortie : ArrayList<Noeud>
+		 */
 		ArrayList<Noeud> neighbours = new ArrayList<>();
 		for(Arc a : getAfterArcsFromNode(node)) {
 			neighbours.add(a.getFin());
@@ -126,6 +183,10 @@ public class Reseau {
 	}
 
 	public ArrayList<Noeud> getBeforeNeighbours(Noeud node) {
+		/* Acces aux noeuds precedant un autre noeud
+		Entree : Noeud
+		Sortie : ArrayList<Noeud>
+		 */
 		ArrayList<Noeud> neighbours = new ArrayList<>();
 		for(Arc a : getBeforeArcsFromNode(node)) {
 			neighbours.add(a.getDepart());
@@ -134,7 +195,10 @@ public class Reseau {
 	}
 
 	public ArrayList<Noeud> plusCourtChemin(Paquet paquet) {
-		// Calcul du plus court chemin
+		/* Calcul du plus court chemin pour un paquet
+		Entree : Paquet
+		Sortie : ArrayList<Noeud>
+		 */
 		Noeud dep = paquet.getNoeudDepart();
 		Noeud dest = paquet.getNoeudDestination();
 
@@ -208,7 +272,10 @@ public class Reseau {
 	}
 
 	public ArrayList<Noeud> randomPath(Paquet paquet) {
-		// Calcul d'un chemin aléatoire
+		/* Calcul d'un chemin aleatoire pour un paquet
+		Entree : Paquet
+		Sortie : ArrayList<Noeud>
+		 */
 		Noeud dep = paquet.getNoeudDepart();
 		Noeud dest = paquet.getNoeudDestination();
 
@@ -274,7 +341,10 @@ public class Reseau {
 	}
 
 	public int[][] arcToMatrix() {
-		// Construction de la matrice d'adjacence
+		/* Construction de la matrice d'adjacence associee au reseau
+		Entree : void
+		Sortie : int[][]
+		 */
 		int n = this.noeuds.size();
 		int[][] adjacentMatrix = new int[n][n];
 		for(int i=0; i<n; i++) {
@@ -292,6 +362,10 @@ public class Reseau {
 	}
 
 	public void printMatrix(int[][] m) {
+		/* Affichage lisible d'une matrice
+		Entree : int[][]
+		Sortie : void
+		 */
 		int n = m.length;
 		System.out.print("[ ");
 		for(int i=0; i<n; i++) {
@@ -306,6 +380,10 @@ public class Reseau {
 	}
 
 	public void enterArc(Paquet paquet) {
+		/* Ajout d'un paquet a un arc
+		Entree : Paquet
+		Sortie : void
+		 */
 		for (int i=0; i<paquet.getTrajet().size(); i++) {
 			Noeud current = paquet.getTrajet().get(i);
 			if (current == paquet.getNoeudPosition()) {
@@ -317,9 +395,10 @@ public class Reseau {
 	}
 
 	public void enterNoeud(Paquet paquet) {
-		// Mise a jour arcs[], noeuds[] et paquets[]
-		// Probleme: comment metre a jour la position du paquet dans l'arc sans
-		// avoir acces a la taille de l'arc
+		/* Ajout d'un paquet a un noeud
+		Entree : Paquet
+		Sortie : void
+		 */
 		for (int i=0; i<paquet.getTrajet().size(); i++) {
 			Noeud current = paquet.getTrajet().get(i);
 			if (current == paquet.getNoeudPosition()) {
@@ -337,6 +416,10 @@ public class Reseau {
 	}
 
 	public void refreshArcs() {
+		/* Mise a jour des arcs
+		Entree : void
+		Sortie : void
+		 */
 		for(Arc a : this.arcs) {
 			Paquet exitPaquet = a.refresh();
 			if (exitPaquet != null) {
@@ -347,6 +430,10 @@ public class Reseau {
 	}
 
 	public void refreshNoeuds() {
+		/* Mise a jour des noeuds
+		Entree : void
+		Sortie : void
+		 */
 		Paquet exitPaquet;
 		for(Noeud noeud : this.noeuds) {
 			exitPaquet = noeud.exitPaquet();
@@ -357,13 +444,20 @@ public class Reseau {
 	}
 
 	public void refresh() {
-		// Mise à jour générale
+		/* Mise a jour du reseau
+		Entree : void
+		Sortie : void
+		 */
 		this.refreshNoeuds();
 		this.refreshArcs();
 		this.temps++;
 	}
 
 	public void paquetsGeneration(int num, boolean random){
+		/* Generation de paquets aleatoires
+		Entree : int, boolean
+		Sortie : void
+		 */
 		Noeud dep = null;
 		Noeud dest = null;
 		Paquet paquet = null;
@@ -392,7 +486,10 @@ public class Reseau {
 	}
 
 	public void run() throws InterruptedException {
-		// Fonction principale appelée par l'interface graphique
+		/* Boucle d'execution controlee par l'interface graphique
+		Entree : void
+		Sortie : void
+		 */
 		while(true) {
 			this.refresh();
 			System.out.println("Loop");
