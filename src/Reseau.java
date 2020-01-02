@@ -242,12 +242,16 @@ public class Reseau {
 				return null;
 			}
 
-			nextNode = this.noeuds.get((int) Math.round(Math.random() * (this.noeuds.size()-1)));
-			int weight = weights[this.noeuds.indexOf(nextNode)];
-			while (visitedNodes.contains(nextNode) || weight < 0 || (nextNode == dep && loop != 0)){
-				nextNode = this.noeuds.get((int) Math.round(Math.random() * (this.noeuds.size()-1)));
-				weight = weights[this.noeuds.indexOf(nextNode)];
+			ArrayList<Noeud> potentialNodes = new ArrayList<>();
+			for (Noeud node : this.noeuds) {
+				if (!visitedNodes.contains(node) && weights[this.noeuds.indexOf(node)] >= 0 && (nextNode != dep || loop == 0)) {
+					potentialNodes.add(node);
+				}
 			}
+			if(potentialNodes.isEmpty()) {
+				return null;
+			}
+			nextNode = potentialNodes.get((int) Math.round(Math.random() * (potentialNodes.size()-1)));
 			visitedNodes.add(nextNode);
 
 			for (Noeud node : getAfterNeighbours(nextNode)) {
@@ -360,17 +364,30 @@ public class Reseau {
 	}
 
 	public void paquetsGeneration(int num, boolean random){
+		Noeud dep = null;
+		Noeud dest = null;
+		Paquet paquet = null;
+		ArrayList<Noeud> path;
 		for(int i=0; i<num; i++){
-			Noeud dep = this.noeuds.get((int) Math.round(Math.random() * (this.noeuds.size()-1)));
-			Noeud dest = this.noeuds.get((int) Math.round(Math.random() * (this.noeuds.size()-1)));
-			int priority = (int) Math.round(Math.random() * 5);
-			this.addPaquet(new Paquet(i, dep, dest, priority, new ArrayList<>()));
-			ArrayList<Noeud> path;
-			if(random) {
-				path = randomPath(this.getPaquets().get(i));
-			} else
-				path = plusCourtChemin(this.getPaquets().get(i));
-			this.getPaquets().get(i).setTrajet(path);
+			path = null;
+			while(path == null) {
+				dep = this.noeuds.get((int) Math.round(Math.random() * (this.noeuds.size()-1)));
+				dest = this.noeuds.get((int) Math.round(Math.random() * (this.noeuds.size()-1)));
+				int priority;
+				priority = 1;
+				//priority = (int) Math.round(Math.random() * 5);
+				paquet = new Paquet(i, dep, dest, priority, new ArrayList<>());
+				if(random) {
+					path = randomPath(paquet);
+				} else {
+					path = plusCourtChemin(paquet);
+				}
+			}
+			paquet.setTrajet(path);
+			//System.out.println("\n" + dep);
+			//System.out.println(dest);
+			//System.out.println(path);
+			this.addPaquet(paquet);
 		}
 	}
 
