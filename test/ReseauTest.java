@@ -196,7 +196,7 @@ public class ReseauTest {
         System.out.println("");
     }*/
 
-    @org.junit.jupiter.api.Test
+    /*@org.junit.jupiter.api.Test
     public void randomPathUseTest() throws InterruptedException {
         Reseau r = new Reseau();
         Noeud n0 = new Noeud(0);
@@ -312,11 +312,11 @@ public class ReseauTest {
             System.out.println("Size a6: " + a6.getListePaquet().size());
             System.out.println("Size a7: " + a7.getListePaquet().size());
             System.out.println("Size a8: " + a8.getListePaquet().size());
-            System.out.println("Size a9: " + a9.getListePaquet().size());*/
+            System.out.println("Size a9: " + a9.getListePaquet().size());
             System.out.println("");
             //r.refreshNoeuds();
             r.refresh();
-            /*Thread.sleep(1000);
+            Thread.sleep(1000);
             System.out.println("Position courante p0: " + p0.getNoeudPosition().getID());
             System.out.println("Position courante p1: " + p1.getNoeudPosition().getID());
             System.out.println("Size n0: " + n0.getQueue().size());
@@ -339,7 +339,7 @@ public class ReseauTest {
             System.out.println("Size a9: " + a9.getListePaquet().size());
             System.out.println("");
             r.refreshArcs();
-            Thread.sleep(1000);*/
+            Thread.sleep(1000);
         }
         System.out.println("Temps: " + r.getTemps());
         if(p0.getNoeudPosition() == p0.getNoeudDestination()){
@@ -374,8 +374,59 @@ public class ReseauTest {
         System.out.println("Size a6: " + a6.getListePaquet().size());
         System.out.println("Size a7: " + a7.getListePaquet().size());
         System.out.println("Size a8: " + a8.getListePaquet().size());
-        System.out.println("Size a9: " + a9.getListePaquet().size());*/
+        System.out.println("Size a9: " + a9.getListePaquet().size());
         System.out.println("");
+    }*/
+
+    @org.junit.jupiter.api.Test
+    public void generationTest() {
+        Reseau r = new Reseau();
+        //System.out.println("Arcs: " + r.getArcs());
+        //System.out.println("Noeuds: " + r.getNoeuds());
+        //System.out.println("Paquets: " + r.getPaquets());
+        Noeud n0 = new Noeud(0);
+        Noeud n1 = new Noeud(1);
+        Noeud n2 = new Noeud(2);
+        Noeud n3 = new Noeud(3);
+        Noeud n4 = new Noeud(4);
+        Noeud n5 = new Noeud(5);
+        Noeud n6 = new Noeud(6);
+        Noeud n7 = new Noeud(7);
+        r.addNoeud(n0);
+        r.addNoeud(n1);
+        r.addNoeud(n2);
+        r.addNoeud(n3);
+        r.addNoeud(n4);
+        r.addNoeud(n5);
+        r.addNoeud(n6);
+        r.addNoeud(n7);
+        Arc a0 = new Arc(0, n0, n1, 1, 1);
+        Arc a1 = new Arc(1, n0, n2, 1, 1);
+        Arc a2 = new Arc(2, n2, n4, 1, 1);
+        Arc a3 = new Arc(3, n4, n5, 1, 1);
+        Arc a4 = new Arc(4, n6, n7, 1, 1);
+        Arc a5 = new Arc(5, n2, n6, 1, 1);
+        Arc a6 = new Arc(6, n5, n7, 1, 1);
+        Arc a7 = new Arc(7, n1, n6, 1, 1);
+        Arc a8 = new Arc(8, n2, n3, 1, 1);
+        Arc a9 = new Arc(9, n3, n5, 1, 1);
+        r.addArc(a0);
+        r.addArc(a1);
+        r.addArc(a2);
+        r.addArc(a3);
+        r.addArc(a4);
+        r.addArc(a5);
+        r.addArc(a6);
+        r.addArc(a7);
+        r.addArc(a8);
+        r.addArc(a9);
+        //System.out.println("\nArcs: " + r.getArcs());
+        //System.out.println("Noeuds: " + r.getNoeuds());
+        //System.out.println("Paquets: " + r.getPaquets());
+        r.paquetsGeneration(10, true);
+        System.out.println("\nArcs: " + r.getArcs());
+        System.out.println("Noeuds: " + r.getNoeuds());
+        System.out.println("Paquets: " + r.getPaquets());
     }
 
     /*@org.junit.jupiter.api.Test
