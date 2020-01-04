@@ -58,12 +58,12 @@ public class Reseau {
 		Entree : Paquet
 		Sortie : void
 		 */
-		assert(!this.paquets.contains(paquet));
+		assert(!this.paquets.contains(paquet)); //on vérifie que le paquet n'est pas déjà dans la liste paquets
 		for(Paquet p : this.paquets) {
 			assert(paquet.getId() != p.getId());
 		}
 		this.paquets.add(paquet);
-		for(Noeud noeud : this.noeuds) {
+		for(Noeud noeud : this.noeuds) { //on met le paquet dans un noeud
 			if(noeud == paquet.getNoeudDepart()) {
 				noeud.enterPaquet(paquet);
 				return;
@@ -93,7 +93,7 @@ public class Reseau {
 		for(Noeud n : this.noeuds) {
 			assert(!n.getID().equals(noeud.getID()));
 		}
-		this.noeuds.add(noeud);
+		this.noeuds.add(noeud); //pb fct add, n'existe pas pour les noeuds...
 	}
 
 	public void removePaquet(Paquet paquet) {
@@ -102,7 +102,7 @@ public class Reseau {
 		Sortie : void
 		 */
 		assert(this.paquets.contains(paquet));
-		this.paquets.remove(paquet);
+		this.paquets.remove(paquet); //remove pareil pour les paquets..
 	}
 
 	public void removeArc(Arc arc) {
@@ -114,20 +114,6 @@ public class Reseau {
 		this.arcs.remove(arc);
 	}
 
-	public void removeNoeud(Noeud noeud) {
-		/* Retrait d'un noeud du reseau
-		Entree : Noeud
-		Sortie : void
-		 */
-		assert(this.noeuds.contains(noeud));
-		this.noeuds.remove(noeud);
-		for(Arc a : getBeforeArcsFromNode(noeud)) {
-			this.removeArc(a);
-		}
-		for(Arc a : getAfterArcsFromNode(noeud)) {
-			this.removeArc(a);
-		}
-	}
 
 	public Arc getArcFromNodes(Noeud depart, Noeud fin) {
 		/* Acces a un arc a partir de ses extremites
@@ -192,6 +178,20 @@ public class Reseau {
 			neighbours.add(a.getDepart());
 		}
 		return neighbours;
+	}
+	public void removeNoeud(Noeud noeud) {
+		/* Retrait d'un noeud du reseau
+		Entree : Noeud
+		Sortie : void
+		 */
+		assert(this.noeuds.contains(noeud));
+		this.noeuds.remove(noeud);
+		for(Arc a : getBeforeArcsFromNode(noeud)) {
+			this.removeArc(a);
+		}
+		for(Arc a : getAfterArcsFromNode(noeud)) {
+			this.removeArc(a);
+		}
 	}
 
 	public ArrayList<Noeud> plusCourtChemin(Paquet paquet) {
