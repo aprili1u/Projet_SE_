@@ -202,6 +202,7 @@ public class Reseau {
 		Noeud dep = paquet.getNoeudDepart();
 		Noeud dest = paquet.getNoeudDestination();
 
+	    // Pas de chemin possible si noeuds isoles
 		if(getAfterNeighbours(dep).isEmpty() || getBeforeNeighbours(dest).isEmpty()) {
 			return null;
 		}
@@ -212,6 +213,7 @@ public class Reseau {
 		ArrayList<Noeud> visitedNodes = new ArrayList<>();
 		ArrayList<Noeud> path = new ArrayList<>();
 
+		// Initialisation des poids et predecesseurs
 		for(Noeud node : this.noeuds) {
 			weights[this.noeuds.indexOf(node)] = -1;
 		}
@@ -235,6 +237,7 @@ public class Reseau {
 			minNode = null;
 			min = 1000000000;
 
+			// Determination du nouveau noeud a tester
 			for (Noeud node : this.noeuds) {
 				int weight = weights[this.noeuds.indexOf(node)];
 				if (!visitedNodes.contains(node) && weight >= 0 && weight < min && (node != dep || loop == 0)) {
@@ -242,11 +245,15 @@ public class Reseau {
 					min = weights[this.noeuds.indexOf(node)];
 				}
 			}
+
+			// Pas de chemin possible si pas de nouveau noeud possible
 			if(minNode == null) {
 				return null;
 			}
+
 			visitedNodes.add(minNode);
 
+			// Mise a jour des poids et des predecesseurs
 			for (Noeud node : getAfterNeighbours(minNode)) {
 				minNodeWeight = weights[this.noeuds.indexOf(minNode)];
 				currentNodeWeight = weights[this.noeuds.indexOf(node)];
@@ -259,6 +266,7 @@ public class Reseau {
 			loop++;
 		}
 
+		// Construction du plus court chemin
 		Noeud current = dest;
 		Noeud predecessor;
 		while(current != dep) {
@@ -279,6 +287,7 @@ public class Reseau {
 		Noeud dep = paquet.getNoeudDepart();
 		Noeud dest = paquet.getNoeudDestination();
 
+		// Pas de chemin possible si noeuds isoles
 		if(getAfterNeighbours(dep).isEmpty() || getBeforeNeighbours(dest).isEmpty()) {
 			return null;
 		}
@@ -289,6 +298,7 @@ public class Reseau {
 		ArrayList<Noeud> visitedNodes = new ArrayList<>();
 		ArrayList<Noeud> path = new ArrayList<>();
 
+		// Initialisation des poids et predecesseurs
 		for(Noeud node : this.noeuds) {
 			weights[this.noeuds.indexOf(node)] = -1;
 		}
@@ -305,22 +315,29 @@ public class Reseau {
 		int loop = 0;
 
 		while(nextNode != dest) {
+			// Pas de chemin possible si plus de noeuds a visiter
 			if(visitedNodes.size() == this.noeuds.size()){
 				return null;
 			}
 
+			// Determination des nouveaux noeuds potentiels
 			ArrayList<Noeud> potentialNodes = new ArrayList<>();
 			for (Noeud node : this.noeuds) {
 				if (!visitedNodes.contains(node) && weights[this.noeuds.indexOf(node)] >= 0 && (nextNode != dep || loop == 0)) {
 					potentialNodes.add(node);
 				}
 			}
+
+			// Pas de chemin possible si pas de nouveaux noeuds possibles
 			if(potentialNodes.isEmpty()) {
 				return null;
 			}
+
+			// Choix du nouveau noeud aleatoirement parmi les noeuds possibles
 			nextNode = potentialNodes.get((int) Math.round(Math.random() * (potentialNodes.size()-1)));
 			visitedNodes.add(nextNode);
 
+			// Mise a jour des poids et predecesseurs
 			for (Noeud node : getAfterNeighbours(nextNode)) {
 				weights[this.noeuds.indexOf(node)] = 0;
 				predecessors[this.noeuds.indexOf(node)] = nextNode;
@@ -328,6 +345,7 @@ public class Reseau {
 			loop++;
 		}
 
+		// Construction du chemin
 		Noeud current = dest;
 		Noeud predecessor;
 		while(current != dep) {
@@ -462,6 +480,7 @@ public class Reseau {
 		Noeud dest = null;
 		Paquet paquet = null;
 		ArrayList<Noeud> path;
+
 		for(int i=0; i<num; i++){
 			path = null;
 			while(path == null) {
