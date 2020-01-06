@@ -3,7 +3,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ReseauTest {
 
-    /*@org.junit.jupiter.api.Test
+    @org.junit.jupiter.api.Test
     public void plusCourtCheminTest() {
         //System.out.println("Hello world");
         Reseau r = new Reseau();
@@ -26,13 +26,13 @@ public class ReseauTest {
         r.addNoeud(n5);
         r.addNoeud(n6);
         r.addNoeud(n7);
-        Arc a0 = new Arc(n0, n1, 1, 1);
-        Arc a1 = new Arc(n0, n2, 1, 1);
-        Arc a2 = new Arc(n2, n4, 1, 1);
-        Arc a3 = new Arc(n4, n5, 1, 1);
-        Arc a4 = new Arc(n6, n7, 1, 1);
-        Arc a5 = new Arc(n2, n6, 1, 3);
-        Arc a6 = new Arc(n5, n7, 1, 1);
+        Arc a0 = new Arc(0, n0, n1, 1, 1);
+        Arc a1 = new Arc(1, n0, n2, 1, 1);
+        Arc a2 = new Arc(2, n2, n4, 1, 1);
+        Arc a3 = new Arc(3, n4, n5, 1, 1);
+        Arc a4 = new Arc(4, n6, n7, 1, 1);
+        Arc a5 = new Arc(5, n2, n6, 1, 3);
+        Arc a6 = new Arc(6, n5, n7, 1, 1);
         r.addArc(a0);
         r.addArc(a1);
         r.addArc(a2);
@@ -75,9 +75,9 @@ public class ReseauTest {
             System.out.print(" -> ");
         }
         System.out.println(path.get(path.size()-1).getID());
-    }*/
+    }
 
-    /*@org.junit.jupiter.api.Test
+    @org.junit.jupiter.api.Test
     public void randomPathGenerationTest() {
         //System.out.println("Hello world");
         Reseau r = new Reseau();
@@ -100,16 +100,16 @@ public class ReseauTest {
         r.addNoeud(n5);
         r.addNoeud(n6);
         r.addNoeud(n7);
-        Arc a0 = new Arc(n0, n1, 1, 1);
-        Arc a1 = new Arc(n0, n2, 1, 1);
-        Arc a2 = new Arc(n2, n4, 1, 1);
-        Arc a3 = new Arc(n4, n5, 1, 1);
-        Arc a4 = new Arc(n6, n7, 1, 1);
-        Arc a5 = new Arc(n2, n6, 1, 1);
-        Arc a6 = new Arc(n5, n7, 1, 1);
-        Arc a7 = new Arc(n1, n6, 1, 1);
-        Arc a8 = new Arc(n2, n3, 1, 1);
-        Arc a9 = new Arc(n3, n5, 1, 1);
+        Arc a0 = new Arc(0, n0, n1, 1, 1);
+        Arc a1 = new Arc(1, n0, n2, 1, 1);
+        Arc a2 = new Arc(2, n2, n4, 1, 1);
+        Arc a3 = new Arc(3, n4, n5, 1, 1);
+        Arc a4 = new Arc(4, n6, n7, 1, 1);
+        Arc a5 = new Arc(5, n2, n6, 1, 1);
+        Arc a6 = new Arc(6, n5, n7, 1, 1);
+        Arc a7 = new Arc(7, n1, n6, 1, 1);
+        Arc a8 = new Arc(8, n2, n3, 1, 1);
+        Arc a9 = new Arc(9, n3, n5, 1, 1);
         r.addArc(a0);
         r.addArc(a1);
         r.addArc(a2);
@@ -142,16 +142,16 @@ public class ReseauTest {
             System.out.println(path.get(path.size() - 1).getID());
             System.out.println("");
         }
-    }*/
+    }
 
-    /*@org.junit.jupiter.api.Test
+    @org.junit.jupiter.api.Test
     void trajetPaquetTest() throws InterruptedException {
         Reseau r = new Reseau();
         Noeud n0 = new Noeud(0);
         Noeud n1 = new Noeud(1);
         r.addNoeud(n0);
         r.addNoeud(n1);
-        Arc a0 = new Arc(n0, n1, 1, 1);
+        Arc a0 = new Arc(0, n0, n1, 1, 1);
         r.addArc(a0);
         ArrayList<Noeud> path = new ArrayList<>();
         path.add(n0);
@@ -194,9 +194,9 @@ public class ReseauTest {
         System.out.println("Position: " + a0.getListePosition());
         System.out.println("Longueur: " + a0.getLongueur());
         System.out.println("");
-    }*/
+    }
 
-    /*@org.junit.jupiter.api.Test
+    @org.junit.jupiter.api.Test
     public void randomPathUseTest() throws InterruptedException {
         Reseau r = new Reseau();
         Noeud n0 = new Noeud(0);
@@ -295,7 +295,7 @@ public class ReseauTest {
             } else{
                 System.out.println("Position courante p2: " + p2.getNoeudPosition().getID());
             }
-            /*System.out.println("Size n0: " + n0.getQueue().size());
+            System.out.println("Size n0: " + n0.getQueue().size());
             System.out.println("Size n1: " + n1.getQueue().size());
             System.out.println("Size n2: " + n2.getQueue().size());
             System.out.println("Size n3: " + n3.getQueue().size());
@@ -357,7 +357,7 @@ public class ReseauTest {
         } else{
             System.out.println("Position courante p2: " + p2.getNoeudPosition().getID());
         }
-        /*System.out.println("Size n0: " + n0.getQueue().size());
+        System.out.println("Size n0: " + n0.getQueue().size());
         System.out.println("Size n1: " + n1.getQueue().size());
         System.out.println("Size n2: " + n2.getQueue().size());
         System.out.println("Size n3: " + n3.getQueue().size());
@@ -376,7 +376,7 @@ public class ReseauTest {
         System.out.println("Size a8: " + a8.getListePaquet().size());
         System.out.println("Size a9: " + a9.getListePaquet().size());
         System.out.println("");
-    }*/
+    }
 
     @org.junit.jupiter.api.Test
     public void generationTest() {
