@@ -1,33 +1,27 @@
 import java.util.ArrayList;
 
 public class Paquet {
-    private ArrayList Position;
+    private Noeud NoeudPosition;
     private Noeud NoeudDestination;
     private Noeud NoeudDepart;
     private int Priority;
+    private int ID;
     private ArrayList<Noeud> Trajet;
-    private static int conteur = 0;
-    private int id;
 
-
-    public Paquet (Noeud NoeudDepart,Noeud NoeudDestination, int Priority, ArrayList<Noeud> Trajet)  {
-        this.Position = new ArrayList();
-        this.Position.add(NoeudDepart);
-        this.Position.add(Trajet.get(1));
-        this.Position.add(0);
+    public Paquet (int ID, Noeud NoeudDepart, Noeud NoeudDestination, int Priority, ArrayList<Noeud> Trajet)  {
+        this.NoeudPosition = NoeudDepart;
         this.NoeudDestination = NoeudDestination;
         this.NoeudDepart = NoeudDepart;
         this.Priority = Priority;
         this.Trajet = Trajet;
-        this.id = ++conteur;
+        this.ID = ID;
     }
 
-    public int getId() { return this.id; }
-
-
-    public ArrayList getPosition() {
-        return this.Position;
+    public Noeud getNoeudPosition() {
+        return this.NoeudPosition;
     };
+
+    public void setNoeudPosition(Noeud position) { this.NoeudPosition = position; }
 
     public Noeud getNoeudDestination() {
         return this.NoeudDestination;
@@ -41,8 +35,21 @@ public class Paquet {
         return this.Priority;
     };
 
+    public int getId() { return this.ID; };
+
     public ArrayList<Noeud> getTrajet () {
         return this.Trajet;
     };
 
+
+    public void setTrajet(ArrayList<Noeud> trajet) { this.Trajet = trajet;}
+
+
+    public boolean equals(Paquet other) {
+        return this.ID == other.ID;
+    }
+
+    public String toString(){
+        return String.valueOf(this.ID);
+    }
 }

@@ -17,7 +17,7 @@ class NoeudTest {
     @org.junit.jupiter.api.Test
     void enterPaquet() {
         Noeud node = new Noeud(7);
-        Paquet pack = new Paquet(node, node, 5, null);
+        Paquet pack = new Paquet(1, node, node, 5, null);
         node.enterPaquet(pack);
         assertFalse(node.getQueue().isEmpty());
         assertEquals(node.getQueue().element(), pack);
@@ -26,9 +26,9 @@ class NoeudTest {
     @org.junit.jupiter.api.Test
     void exitPaquet() {
         Noeud node = new Noeud(7);
-        Paquet pack = new Paquet(node,node,5,null);
-        Paquet pack2 = new Paquet(node,node,7,null);
-        Paquet pack3 = new Paquet(node,node,3,null);
+        Paquet pack = new Paquet(1, node,node,5,null);
+        Paquet pack2 = new Paquet(2, node,node,7,null);
+        Paquet pack3 = new Paquet(3, node,node,3,null);
         node.enterPaquet(pack);
         node.enterPaquet(pack2);
         node.enterPaquet(pack3);
