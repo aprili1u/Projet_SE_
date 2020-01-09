@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
 public class Arc {
-    private int ID;
+    private static int count = 0;
     private Noeud depart;
     private Noeud fin;
     private int capacite;
@@ -10,8 +10,8 @@ public class Arc {
     private ArrayList<Paquet> listePaquet;
     private ArrayList<Integer> listePosition;
 
-    public Arc(int ID, Noeud depart, Noeud fin, int capacite, int longueur) {
-        this.ID = ID;
+    public Arc(Noeud depart, Noeud fin, int capacite, int longueur) {
+        this.ID = ++count;
         this.depart = depart;
         this.fin = fin;
         this.capacite = 1;
@@ -48,7 +48,7 @@ public class Arc {
 
 
     public boolean equals(Arc other) {
-        return this.ID == other.ID;
+        return this.ID == other.getID();
     }
 
     public String toString() {
